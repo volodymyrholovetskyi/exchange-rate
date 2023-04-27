@@ -19,6 +19,7 @@
 - Hibernate
 - Swagger
 - Gradle
-- JUnit 5, AssertJ
+- JUnit 5
+- AssertJ
 - Git
 ---

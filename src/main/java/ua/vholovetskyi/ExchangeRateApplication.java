@@ -1,4 +1,4 @@
-package ua.vholovetskyi.exchangerate;
+package ua.vholovetskyi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
