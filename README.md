@@ -17,9 +17,12 @@
 - java 17
 - Spring Boot
 - Hibernate
+- PostgreSQL
+- HttpClient
 - Swagger
 - Gradle
 - JUnit 5
 - AssertJ
+- Docker
 - Git
 ---
