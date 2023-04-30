@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
-public class ExchangeRateAverageDto {
+public class AverageDto {
 
     private BigDecimal averageRateBuy;
     private BigDecimal averageRateSell;

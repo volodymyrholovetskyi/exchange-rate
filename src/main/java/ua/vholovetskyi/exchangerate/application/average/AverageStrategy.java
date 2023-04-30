@@ -1,8 +1,10 @@
 package ua.vholovetskyi.exchangerate.application.average;
 
-import ua.vholovetskyi.exchangerate.application.port.dto.ExchangeRateDto;
+import ua.vholovetskyi.exchangerate.application.dto.ExchangeRateDto;
 
-public interface ExchangeRateAverage {
+import java.util.List;
 
-    AverageDto getAverage(ExchangeRateDto exchangeRate);
+public interface AverageStrategy {
+
+    AverageDto calculate(List<ExchangeRateDto> exchangeRate);
 }

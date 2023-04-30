@@ -1,30 +1,24 @@
 package ua.vholovetskyi.exchangerate.application.average;
 
-import ua.vholovetskyi.exchangerate.application.port.dto.ExchangeRateDto;
+import ua.vholovetskyi.exchangerate.application.dto.ExchangeRateDto;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.stream.Stream;
 
-public class ExchangeRateAverImpl implements AverageStrategy {
+public class AverageExchangeRate implements AverageStrategy {
 
     @Override
     public AverageDto calculate(List<ExchangeRateDto> exchangeRate) {
-        return new AverageDto(
-                getAverageRateBuy(exchangeRate),
-                getAverageRateSell(exchangeRate)
-        );
+        final var size = exchangeRate.size();
+        final var rateBuy = exchangeRate.stream().map(e -> e.amount().getRateBuy());
+        final var rateSell = exchangeRate.stream().map(e -> e.amount().getRateSell());
+        return new AverageDto(getAverage(size, rateBuy), getAverage(size, rateSell));
     }
 
-    private BigDecimal getAverageRateBuy(List<ExchangeRateDto> exchangeRate) {
-        final BigDecimal sum = exchangeRate.stream().map(e -> e.amount().getRateBuy()).reduce(BigDecimal.ZERO, BigDecimal::add);
-        final long count = exchangeRate.stream().map(e -> e.amount().getRateBuy()).count();
-        return sum.divide(BigDecimal.valueOf(count), RoundingMode.HALF_EVEN);
-    }
-
-    private BigDecimal getAverageRateSell(List<ExchangeRateDto> exchangeRate) {
-        final BigDecimal sum = exchangeRate.stream().map(e -> e.amount().getRateSell()).reduce(BigDecimal.ZERO, BigDecimal::add);
-        final long count = exchangeRate.stream().map(e -> e.amount().getRateSell()).count();
+    private BigDecimal getAverage(int count, Stream<BigDecimal> rate) {
+        final var sum = rate.reduce(BigDecimal.ZERO, BigDecimal::add);
         return sum.divide(BigDecimal.valueOf(count), RoundingMode.HALF_EVEN);
     }
 }

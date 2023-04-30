@@ -1,15 +1,15 @@
-package ua.vholovetskyi.exchangerate.application.port.dto;
+package ua.vholovetskyi.exchangerate.application.dto;
 
 import ua.vholovetskyi.exchangerate.domain.Bank;
 import ua.vholovetskyi.exchangerate.domain.ExchangeRate;
 import ua.vholovetskyi.exchangerate.domain.Money;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record ExchangeRateDto(
         Bank bank,
         Money amount,
-        LocalDateTime createAt
+        LocalDate createAt
 ) {
 
     public ExchangeRate toExchangeRate() {
