@@ -1,4 +1,4 @@
-package ua.vholovetskyi.exchangerate.infrastructure.client.currency;
+package ua.vholovetskyi.exchangerate.infrastructure.client;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -7,15 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import ua.vholovetskyi.exchangerate.application.dto.ExchangeRateDto;
-import ua.vholovetskyi.exchangerate.infrastructure.client.currency.dto.CurrencyMonoResponse;
-import ua.vholovetskyi.exchangerate.infrastructure.client.query.QueryParamiter;
+import ua.vholovetskyi.exchangerate.infrastructure.client.dto.CurrencyMonoResponse;
+import ua.vholovetskyi.exchangerate.infrastructure.client.query.QueryProperty;
 
 import java.util.Collections;
 import java.util.List;
 
 @Slf4j
-public class CurrencyMonoHttpClient extends BaseCurrencyHttpClient {
-    public CurrencyMonoHttpClient(RestTemplate restTemplate, QueryParamiter params) {
+class MonoHttpClient extends BaseHttpClient {
+    public MonoHttpClient(RestTemplate restTemplate, QueryProperty params) {
         super(restTemplate, params);
     }
 

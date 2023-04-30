@@ -1,4 +1,4 @@
-package ua.vholovetskyi.exchangerate.infrastructure.client.currency.dto;
+package ua.vholovetskyi.exchangerate.infrastructure.client.dto;
 
 import ua.vholovetskyi.commons.utils.FormatterUtils;
 import ua.vholovetskyi.exchangerate.application.dto.ExchangeRateDto;

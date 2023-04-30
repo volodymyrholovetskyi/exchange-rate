@@ -1,10 +1,10 @@
-package ua.vholovetskyi.exchangerate.infrastructure.client.currency;
+package ua.vholovetskyi.exchangerate.infrastructure.client;
 
 import ua.vholovetskyi.exchangerate.application.dto.ExchangeRateDto;
 
 import java.util.List;
 
-public interface CurrencyHttpClient {
+interface CurrencyHttpClient {
 
     List<ExchangeRateDto> getExchangeRate();
 }

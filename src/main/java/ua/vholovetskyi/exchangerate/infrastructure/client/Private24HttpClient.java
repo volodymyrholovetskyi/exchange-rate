@@ -1,4 +1,4 @@
-package ua.vholovetskyi.exchangerate.infrastructure.client.currency;
+package ua.vholovetskyi.exchangerate.infrastructure.client;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -6,15 +6,15 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import ua.vholovetskyi.exchangerate.application.dto.ExchangeRateDto;
-import ua.vholovetskyi.exchangerate.infrastructure.client.currency.dto.CurrencyPrivate24Response;
-import ua.vholovetskyi.exchangerate.infrastructure.client.query.QueryParamiter;
+import ua.vholovetskyi.exchangerate.infrastructure.client.dto.CurrencyPrivate24Response;
+import ua.vholovetskyi.exchangerate.infrastructure.client.query.QueryProperty;
 
 import java.util.Collections;
 import java.util.List;
 
 @Slf4j
-public class CurrencyPrivate24HttpClient extends BaseCurrencyHttpClient {
-    public CurrencyPrivate24HttpClient(RestTemplate restTemplate, QueryParamiter params) {
+class Private24HttpClient extends BaseHttpClient {
+    public Private24HttpClient(RestTemplate restTemplate, QueryProperty params) {
         super(restTemplate, params);
     }
 

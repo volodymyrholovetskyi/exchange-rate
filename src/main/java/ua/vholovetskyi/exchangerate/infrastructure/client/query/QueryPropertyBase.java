@@ -11,7 +11,7 @@ import java.util.Map;
 @NoArgsConstructor
 @Setter
 @Getter
-public class QueryParamiterBase implements QueryParamiter {
+public class QueryPropertyBase implements QueryProperty {
 
     private String baseUrl;
     private Map<String, String> headers = new HashMap<>();

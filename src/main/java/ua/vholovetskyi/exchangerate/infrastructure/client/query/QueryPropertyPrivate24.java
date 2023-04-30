@@ -1,5 +1,5 @@
 package ua.vholovetskyi.exchangerate.infrastructure.client.query;
 
-public class QueryParamiterPrivate24 extends QueryParamiterBase {
+public class QueryPropertyPrivate24 extends QueryPropertyBase {
 
 }

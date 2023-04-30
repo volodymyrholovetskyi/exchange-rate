@@ -3,7 +3,7 @@ package ua.vholovetskyi.exchangerate.infrastructure.client.query;
 
 import java.util.Map;
 
-public interface QueryParamiter {
+public interface QueryProperty {
 
     String getBaseUrl();
 

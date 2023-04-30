@@ -1,30 +1,27 @@
 package ua.vholovetskyi.exchangerate.infrastructure.web;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import ua.vholovetskyi.exchangerate.application.port.QueryCurrencyUseCase;
-import ua.vholovetskyi.exchangerate.application.port.dto.ExchangeRateDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import ua.vholovetskyi.exchangerate.application.dto.RichExchangeRateDto;
+import ua.vholovetskyi.exchangerate.application.port.QueryExchangeRateUseCase;
+import ua.vholovetskyi.exchangerate.domain.Bank;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/exchange-rate/average")
+@RequestMapping("/exchange-rate")
 @RequiredArgsConstructor
-public class CurrencyController implements QueryCurrencyUseCase {
-    private final QueryCurrencyUseCase queryCurrency;
+public class ExchangeRateController {
+    private final QueryExchangeRateUseCase queryCurrency;
 
-    @Override
-    @GetMapping()
-    public List<ExchangeRateDto> getAverageExchangeRates() {
-        return queryCurrency.getAverageExchangeRates();
-    }
-
-    @Override
-    @GetMapping("/period")
-    public List<ExchangeRateDto> getAverageExchangeRatesForPeriod(@RequestParam String from, @RequestParam String to) {
-        return queryCurrency.getAverageExchangeRatesForPeriod(from, to);
+    @GetMapping("/average")
+    @ResponseStatus(HttpStatus.OK)
+    public Map<Bank, Map<String, RichExchangeRateDto>> getAll(@RequestParam Optional<String> from, @RequestParam Optional<String> to) {
+        if (from.isPresent() && to.isPresent()) {
+            return queryCurrency.findByPeriodFromTo(from.get(), to.get());
+        }
+        return queryCurrency.findAll();
     }
 }
