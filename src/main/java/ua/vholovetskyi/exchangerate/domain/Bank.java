@@ -1,13 +1,14 @@
 package ua.vholovetskyi.exchangerate.domain;
 
-public enum BankType {
-    P_24("Privat24"),
-    MINFIN("Minifin"),
-    MONOBANK("Monobank");
+import java.util.Arrays;
 
-    private final String name;
+public enum Bank {
+    PRIVATE_24, MINFIN, MONOBANK;
 
-    BankType(String name) {
-        this.name = name;
+    public Bank parseString(String bank) {
+        return Arrays.stream(values())
+                .filter(v -> v.name().equalsIgnoreCase(bank))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("This type of bank is not supported: " + bank));
     }
 }

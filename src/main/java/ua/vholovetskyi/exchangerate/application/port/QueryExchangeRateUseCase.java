@@ -1,11 +1,14 @@
 package ua.vholovetskyi.exchangerate.application.port;
 
-import ua.vholovetskyi.exchangerate.application.port.dto.ExchangeRateDto;
+import ua.vholovetskyi.exchangerate.application.dto.RichExchangeRateDto;
+import ua.vholovetskyi.exchangerate.domain.Bank;
 
-import java.util.List;
+import java.util.Map;
 
-public interface QueryCurrencyUseCase {
+public interface QueryExchangeRateUseCase {
 
-    List<ExchangeRateDto> getAverageExchangeRates();
-    List<ExchangeRateDto> getAverageExchangeRatesForPeriod(String from, String to);
+    Map<Bank, Map<String, RichExchangeRateDto>> findAll();
+
+    Map<Bank, Map<String, RichExchangeRateDto>> findByPeriodFromTo(String from, String to);
+
 }

@@ -1,4 +1,4 @@
-package ua.vholovetskyi.exchangerate.infrastructure.client.currency;
+package ua.vholovetskyi.exchangerate.infrastructure.client;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,15 +9,15 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import ua.vholovetskyi.exchangerate.infrastructure.client.query.QueryParamiter;
+import ua.vholovetskyi.exchangerate.infrastructure.client.query.QueryProperty;
 
 import java.util.Map;
 
 @Slf4j
 @AllArgsConstructor
-public abstract class BaseCurrencyHttpClient implements CurrencyHttpClient {
+abstract class BaseHttpClient implements CurrencyHttpClient {
     protected final RestTemplate restTemplate;
-    protected final QueryParamiter params;
+    protected final QueryProperty params;
 
     protected HttpEntity<HttpHeaders> getRequestEntity() {
         final var headers = new HttpHeaders();
