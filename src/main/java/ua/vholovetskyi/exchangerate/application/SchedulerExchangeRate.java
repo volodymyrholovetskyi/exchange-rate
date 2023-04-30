@@ -11,10 +11,10 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class ExchangeRateScheduler {
+class SchedulerExchangeRate {
     private final CommandExchangeRateService rateService;
 
-    @Scheduled(cron = "* 1 * * * *")
+    @Scheduled(cron = "0 1 * * * *")
     public void run() {
         log.info("Run scheduler: " + FormatterUtils.getFullDateFormat().format(new Date()));
         rateService.saveExchangeRate();
