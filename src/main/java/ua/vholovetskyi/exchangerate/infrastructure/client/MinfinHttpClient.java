@@ -12,12 +12,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
-//TODO
 class MinfinHttpClient extends BaseHttpClient {
     public MinfinHttpClient(RestTemplate restTemplate, QueryProperty params) {
         super(restTemplate, params);
     }
 
+    //TODO Imitating the work of a bank because I don't have a Api Key!!!
     @Override
     public List<ExchangeRateDto> getExchangeRate() {
         var result = List.of(

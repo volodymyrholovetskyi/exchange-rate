@@ -27,6 +27,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.0.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'org.awaitility', name: 'awaitility', version: '4.2.0'
+    testImplementation group: 'com.github.tomakehurst', name: 'wiremock-jre8-standalone', version: '2.35.0'
+    testImplementation 'com.h2database:h2-mvstore:2.1.214'
 }
 tasks.named('test') {
     useJUnitPlatform()
