@@ -17,7 +17,7 @@ public record CurrencyMinfinResponse(
         return new ExchangeRateDto(
                 Bank.MINFIN,
                 Money.create(ask, bid, currency, "UAH"),
-                FormatterUtils.getCurrencyDate()
+                FormatterUtils.getCurrentDate()
         );
     }
 }

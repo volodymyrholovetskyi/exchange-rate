@@ -1,6 +1,7 @@
 package ua.vholovetskyi.exchangerate.infrastructure.client;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,15 +16,16 @@ import java.util.Map;
 
 @Slf4j
 @AllArgsConstructor
-abstract class BaseHttpClient implements CurrencyHttpClient {
-    protected final RestTemplate restTemplate;
-    protected final QueryProperty params;
+@NoArgsConstructor
+abstract class BaseCurrencyHttpClient implements CurrencyHttpClient {
+    protected RestTemplate restTemplate;
+    protected QueryProperty params;
 
     protected HttpEntity<HttpHeaders> getRequestEntity() {
         final var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         if (!params.getHeaders().isEmpty()) {
-            headers.addAll(parsHeader(params.getHeaders()));
+            headers.addAll(parsParams(params.getHeaders()));
         }
         return new HttpEntity<>(headers);
     }
@@ -32,7 +34,7 @@ abstract class BaseHttpClient implements CurrencyHttpClient {
         return UriComponentsBuilder.fromHttpUrl(params.getBaseUrl()).toUriString();
     }
 
-    private MultiValueMap<String, String> parsHeader(Map<String, String> headerParams) {
+    private MultiValueMap<String, String> parsParams(Map<String, String> headerParams) {
         final MultiValueMap<String, String> headers = new LinkedMultiValueMap<>(headerParams.size());
         for (Map.Entry<String, String> header : headerParams.entrySet()) {
             String key = header.getKey();

@@ -14,13 +14,13 @@ import java.util.Collections;
 import java.util.List;
 
 @Slf4j
-class MonoHttpClient extends BaseHttpClient {
-    public MonoHttpClient(RestTemplate restTemplate, QueryProperty params) {
+class MonoCurrencyHttpClient extends BaseCurrencyHttpClient {
+    public MonoCurrencyHttpClient(RestTemplate restTemplate, QueryProperty params) {
         super(restTemplate, params);
     }
 
     @Override
-    public List<ExchangeRateDto> getExchangeRate() {
+    public List<ExchangeRateDto> getAllExchangeRate() {
         try {
             final ResponseEntity<List<CurrencyMonoResponse>> exchange = restTemplate.exchange(getBaseUrl(), HttpMethod.GET, getRequestEntity(),
                     new ParameterizedTypeReference<>() {
@@ -37,7 +37,7 @@ class MonoHttpClient extends BaseHttpClient {
                     .map(CurrencyMonoResponse::toExchangeRateDto)
                     .toList();
         } catch (ResourceAccessException e) {
-            log.error("[Monobank]: Error while fetching exchange rate using http client: " + e.getMessage());
+            log.error("Error while fetching exchange rate from [Monobank] using http client: " + e.getMessage());
             return Collections.emptyList();
         }
     }

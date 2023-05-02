@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/exchange-rate")
+@RequestMapping("/exchange/rate")
 @RequiredArgsConstructor
 public class ExchangeRateController {
     private final QueryExchangeRateUseCase queryCurrency;

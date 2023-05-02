@@ -19,7 +19,7 @@ public record CurrencyMonoResponse(
         return new ExchangeRateDto(
                 Bank.MONOBANK,
                 Money.create(rateBuy, rateSell, currencyCodeA, currencyCodeB),
-                FormatterUtils.getCurrencyDate()
+                FormatterUtils.getCurrentDate()
         );
     }
 }

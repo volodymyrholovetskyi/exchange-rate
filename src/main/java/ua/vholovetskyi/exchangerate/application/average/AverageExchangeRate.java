@@ -7,14 +7,17 @@ import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class AverageExchangeRate implements AverageStrategy {
+public class AverageExchangeRate implements Average {
 
     @Override
     public AverageDto calculate(List<ExchangeRateDto> exchangeRate) {
-        final var size = exchangeRate.size();
-        final var rateBuy = exchangeRate.stream().map(e -> e.amount().getRateBuy());
-        final var rateSell = exchangeRate.stream().map(e -> e.amount().getRateSell());
-        return new AverageDto(getAverage(size, rateBuy), getAverage(size, rateSell));
+        if (exchangeRate != null && !exchangeRate.isEmpty()) {
+            final var size = exchangeRate.size();
+            final var rateBuy = exchangeRate.stream().map(e -> e.amount().getRateBuy());
+            final var rateSell = exchangeRate.stream().map(e -> e.amount().getRateSell());
+            return new AverageDto(getAverage(size, rateBuy), getAverage(size, rateSell));
+        }
+        return new AverageDto(BigDecimal.ZERO, BigDecimal.ZERO);
     }
 
     private BigDecimal getAverage(int count, Stream<BigDecimal> rate) {

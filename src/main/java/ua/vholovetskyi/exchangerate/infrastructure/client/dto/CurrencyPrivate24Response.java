@@ -18,7 +18,7 @@ public record CurrencyPrivate24Response(
         return new ExchangeRateDto(
                 Bank.PRIVATE_24,
                 Money.create(buy, sale, ccy, base_ccy),
-                FormatterUtils.getCurrencyDate()
+                FormatterUtils.getCurrentDate()
         );
     }
 }

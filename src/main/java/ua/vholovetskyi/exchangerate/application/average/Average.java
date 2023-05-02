@@ -4,7 +4,7 @@ import ua.vholovetskyi.exchangerate.application.dto.ExchangeRateDto;
 
 import java.util.List;
 
-public interface AverageStrategy {
+public interface Average {
 
     AverageDto calculate(List<ExchangeRateDto> exchangeRate);
 }

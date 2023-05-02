@@ -7,7 +7,7 @@ public enum Bank {
 
     public Bank parseString(String bank) {
         return Arrays.stream(values())
-                .filter(v -> v.name().equalsIgnoreCase(bank))
+                .filter(b -> b.name().equalsIgnoreCase(bank))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("This type of bank is not supported: " + bank));
     }

@@ -23,11 +23,11 @@ public class FormatterUtils {
         return new SimpleDateFormat(SHORT_DATE_FORMAT);
     }
 
-    public static LocalDate getCurrencyDate() {
+    public static LocalDate getCurrentDate() {
         return LocalDate.now();
     }
 
-    public static LocalDate parsString(String date) {
+    public static LocalDate toDate(String date) {
         LocalDate parsDate = null;
         try {
             parsDate = LocalDate.parse(date);

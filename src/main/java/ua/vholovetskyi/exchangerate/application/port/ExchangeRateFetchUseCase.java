@@ -4,7 +4,7 @@ import ua.vholovetskyi.exchangerate.application.dto.ExchangeRateDto;
 
 import java.util.List;
 
-public interface ExchangeRateUseCase {
+public interface ExchangeRateFetchUseCase {
 
-    List<ExchangeRateDto> getExchangeRate();
+    List<ExchangeRateDto> fetchExchangeRates();
 }

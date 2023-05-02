@@ -6,5 +6,5 @@ import java.util.List;
 
 interface CurrencyHttpClient {
 
-    List<ExchangeRateDto> getExchangeRate();
+    List<ExchangeRateDto> getAllExchangeRate();
 }

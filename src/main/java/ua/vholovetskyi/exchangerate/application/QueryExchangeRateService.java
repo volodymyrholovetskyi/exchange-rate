@@ -1,8 +1,8 @@
 package ua.vholovetskyi.exchangerate.application;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ua.vholovetskyi.commons.utils.FormatterUtils;
 import ua.vholovetskyi.exchangerate.application.average.AverageDto;
 import ua.vholovetskyi.exchangerate.application.average.AverageService;
 import ua.vholovetskyi.exchangerate.application.dto.ExchangeRateDto;
@@ -16,8 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.stream.Collectors.*;
+import static ua.vholovetskyi.commons.utils.FormatterUtils.toDate;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class QueryExchangeRateService implements QueryExchangeRateUseCase {
 
@@ -32,14 +34,12 @@ public class QueryExchangeRateService implements QueryExchangeRateUseCase {
 
     @Override
     public Map<Bank, Map<String, RichExchangeRateDto>> findByPeriodFromTo(String from, String to) {
-        final var dateFrom = FormatterUtils.parsString(from);
-        final var dateTo = FormatterUtils.parsString(to);
-        List<ExchangeRate> exchangeRates = rateRepository.findByCreateAtBetween(dateFrom, dateTo);
+        final var exchangeRates = rateRepository.findByCreateAtBetween(toDate(from), toDate(to));
         return toRichExchangeRate(exchangeRates);
     }
 
     private Map<Bank, Map<String, RichExchangeRateDto>> toRichExchangeRate(List<ExchangeRate> exchangeRates) {
-        return exchangeRates
+        Map<Bank, Map<String, RichExchangeRateDto>> richExchangeRates = exchangeRates
                 .stream()
                 .map(ExchangeRate::toExchangeRateDto)
                 .collect(groupingBy(ExchangeRateDto::bank, groupingBy(e -> e.amount().fullCurrencyCode(), collectingAndThen(toList(), list -> {
@@ -47,5 +47,7 @@ public class QueryExchangeRateService implements QueryExchangeRateUseCase {
                             return new RichExchangeRateDto(list, averageDto);
                         }
                 ))));
+        log.info("Obtaining the exchange rate from the database. Size: " + richExchangeRates.size());
+        return richExchangeRates;
     }
 }

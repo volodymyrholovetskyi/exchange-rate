@@ -1,5 +1,6 @@
 package ua.vholovetskyi.exchangerate.infrastructure.client;
 
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -13,12 +14,14 @@ import java.util.Collections;
 import java.util.List;
 
 @Slf4j
-class Private24HttpClient extends BaseHttpClient {
-    public Private24HttpClient(RestTemplate restTemplate, QueryProperty params) {
+@NoArgsConstructor
+class Private24CurrencyHttpClient extends BaseCurrencyHttpClient {
+    public Private24CurrencyHttpClient(RestTemplate restTemplate, QueryProperty params) {
         super(restTemplate, params);
     }
 
-    public List<ExchangeRateDto> getExchangeRate() {
+    @Override
+    public List<ExchangeRateDto> getAllExchangeRate() {
         try {
             final var exchange = restTemplate.exchange(getBaseUrl(), HttpMethod.GET, getRequestEntity(),
                     new ParameterizedTypeReference<List<CurrencyPrivate24Response>>() {
@@ -35,7 +38,7 @@ class Private24HttpClient extends BaseHttpClient {
                     .map(CurrencyPrivate24Response::toExchangeRateDto)
                     .toList();
         } catch (ResourceAccessException e) {
-            log.error("[Private24]: Error while fetching exchange rate using http client: " + e.getMessage());
+            log.error("Error while fetching exchange rate from [Private24] using http client: " + e.getMessage());
             return Collections.emptyList();
         }
     }

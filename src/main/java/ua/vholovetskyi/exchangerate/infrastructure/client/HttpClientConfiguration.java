@@ -34,12 +34,23 @@ class HttpClientConfiguration {
     }
 
     @Bean
-    List<CurrencyHttpClient> getCurrencyHttpClient(RestTemplate restTemplate, QueryPropertyPrivate24 p24, QueryPropertyMinfin minfin, QueryPropertyMonobank monobank) {
-        return List.of(
-                new Private24HttpClient(restTemplate, p24),
-                new MonoHttpClient(restTemplate, monobank),
-                new MinfinHttpClient(restTemplate, minfin)
-                );
+    public Private24CurrencyHttpClient getPrivate24(RestTemplate restTemplate, QueryPropertyPrivate24 private24) {
+        return new Private24CurrencyHttpClient(restTemplate, private24);
+    }
+
+    @Bean
+    public MonoCurrencyHttpClient getMonobank(RestTemplate restTemplate, QueryPropertyMonobank monobank) {
+        return new MonoCurrencyHttpClient(restTemplate, monobank);
+    }
+
+    @Bean
+    public MinfinCurrencyHttpClient getMinfin(RestTemplate restTemplate, QueryPropertyMinfin minfin) {
+        return new MinfinCurrencyHttpClient(restTemplate, minfin);
+    }
+
+    @Bean
+    List<CurrencyHttpClient> getCurrencyHttpClient(RestTemplate restTemplate, Private24CurrencyHttpClient p24, MonoCurrencyHttpClient monobank, MinfinCurrencyHttpClient minfin) {
+        return List.of(p24, monobank, minfin);
     }
 
     @Bean
