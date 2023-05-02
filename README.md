@@ -22,7 +22,7 @@
 - Swagger
 - Gradle
 - JUnit 5
-- AssertJ
+- Mockito
 - Docker
 - Git
 ---
